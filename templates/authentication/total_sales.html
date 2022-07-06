@@ -1,0 +1,121 @@
+{% extends 'authentication/dashboard-base.html' %}
+
+{% block name_head %}
+{{name}}
+{% endblock %}
+
+{% block disabled %}hidden="True"{% endblock %}
+
+{% block content %}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['line']});
+      google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Day');
+      {% for j in p_name %}
+      data.addColumn('number', '{{j|safe}}');
+      {% endfor %}
+
+      data.addRows([
+        {% for i in data %}
+        {{i|safe}},
+        {% endfor %}
+      ]);
+
+      var options = {
+        chart: {
+          title: 'Box Office Earnings in First Two Weeks of Opening',
+          subtitle: 'in millions of dollars (USD)'
+        },
+        series: {
+          // Gives each series an axis name that matches the Y-axis below.
+          0: {axis: 'Temps'},
+          1: {axis: 'Daylight'}
+        },
+        axes: {
+          // Adds labels to each axis; they don't have to match the axis names.
+          y: {
+            Temps: {label: 'Temps (Celsius)'},
+            Daylight: {label: 'Daylight'}
+          }
+        }
+      };
+
+      var chart = new google.charts.Line(document.getElementById('linechart_material'));
+
+      chart.draw(data, google.charts.Line.convertOptions(options));
+    }
+    </script>
+    <style>
+        .detail {
+            width:40%; color: black;display: inline-block; border-radius:10px;
+        }
+
+        @media (max-width: 800.98px) {
+            .detail {
+                width:100%;
+            }
+        }
+    </style>
+    <div class="table-responsive">
+      <table id="zero_config" class="table table-bordered no-wrap">
+          <thead class="thead-light">
+          <tr>
+              {% comment %} <th class="sorting_desc" tabindex="0" aria-controls="zero_config" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending" style="width: 0px;" aria-sort="descending">Product Name</th> {% endcomment %}
+              <th>Name</th>
+              <th>Product Name</th>
+              <th>Quantities sold</th>
+              <th>total prize</th>
+              <th>Date</th>
+              <th>company</th>
+          </tr>
+          </thead>
+          <tbody>
+          {% for i in filter %}
+              <tr>
+                <td>{{i.name}}</td>
+                  <td>{{i.pname}}</td>
+                  <td>{{i.qty}}</td>
+                  <td>{{i.rate}}</td>
+                  <td>{{i.date}}</td>
+                  <td>{{i.company}}</td>
+              </tr>
+          {% endfor %}
+          <tr>
+              <td>Total</td>
+              <td >{{sum}}</td>
+          </tr>
+          </tbody>
+      </table>
+  </div>
+    {% comment %} <div id="linechart_material" style="width: 500px; height: 500px"></div> {% endcomment %}
+    {% for i in total_sales %}
+    <a href="{% url 'person-chart' i.sales_name %}">
+        <div class="card detail">
+            <table style="margin-left: 5px;">
+                <tr>
+                    <th style="margin-left:5%;width: 110%;">
+                        <h3 style="font-size: 16px; font-color: black; font-weight: 900;word-wrap: break-word;" class="card-title">{{i.sales_name}}</h3>
+                        <br>
+                        <h3 style="font-size: 16px; font-color: black; font-weight: 900" class="card-title">Sales -{{forloop.counter}}</h3>
+                    </th>
+                    <th>
+                        <div class="card-body">
+                            <div class="text-center">
+                                <input data-plugin="knob" data-width="140" data-height="140" data-linecap=round
+                                    data-fgColor="rgb(9, 138, 127)" value="67" data-skin="tron" data-angleOffset="180"
+                                    data-readOnly=true data-thickness=".1" />
+                            </div>
+                        </div>
+                    </th>
+                </tr>
+            </table>
+        </div>
+        </a>
+    {% endfor %}
+
+{% endblock %}

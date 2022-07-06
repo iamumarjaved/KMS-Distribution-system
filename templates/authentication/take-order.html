@@ -1,0 +1,34 @@
+{% extends 'authentication/dashboard-base.html' %}
+
+{% block name_head %}
+    {{name}}
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<div class="table-responsive">
+<table  class="table table-bordered table-dark" id="table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Product</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">rate</th>
+        <th scope="col">Packing</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for i in orderform %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ i.product_name }}</td>
+                <td>{{ i.quantity }}</td>
+                <td>{{ i.rate }}</td>
+                <td>{{ i.packing }}</td>
+            </tr>
+      {% endfor %}
+    </tbody>
+
+</table>
+</div>
+{% endblock  %}

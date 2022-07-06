@@ -1,0 +1,32 @@
+
+{% extends 'authentication/dashboard-base.html' %}
+
+{% block content %}
+
+<div class="">
+    <div class="box">
+        <div class="table-responsive">
+            <table class="table">
+                <thead class="bg-success text-white">
+                    <tr>
+                        <th>#</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Username</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in orders %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{order.name}}</td>
+                        <td>{{order.packing}}</td>
+                        <td>{{order.rate}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock  %}

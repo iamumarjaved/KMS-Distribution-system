@@ -1,0 +1,65 @@
+{% extends 'authentication/dashboard-base.html' %}
+
+{% block name_head %}
+{{name}}
+{% endblock %}
+
+{% block content %}
+{% load static %}
+
+    <div class="container-login100-form-btn p-t-50">
+        <div class="wrap-login100-form-btn">
+            <div class="login100-form-bgbtn"></div>
+            <button class="login100-form-btn p-t-50">
+                <a href="{% url 'order' name %}">
+                Open saved Order Form Data
+                </a>
+            </button>
+        </div>
+    </div>
+
+    <div class="container-login100-form-btn p-t-50">
+        <div class="wrap-login100-form-btn">
+            <div class="login100-form-bgbtn"></div>
+            <button class="login100-form-btn p-t-50">
+                <a href="{% url 'enter-products' name %}">
+                    Add to Order Form
+                </a>
+            </button>
+        </div>
+    </div>
+
+    <div class="container-login100-form-btn p-t-50">
+        <div class="wrap-login100-form-btn">
+            <div class="login100-form-bgbtn"></div>
+            <button class="login100-form-btn p-t-50">
+                <a href="{% url 'give-order' name %}">
+                Order
+                </a>
+            </button>
+        </div>
+    </div>
+
+{% comment %} <form method="post" class="login100-form validate-form" action="{% url 'order' name %}">
+    {% csrf_token %}
+    <div class="container-login100-form-btn p-t-50">
+        <div class="wrap-login100-form-btn">
+            <div class="login100-form-bgbtn"></div>
+            <button class="login100-form-btn p-t-50">
+                Open saved Order Form Data
+            </button>
+        </div>
+    </div>
+</form>
+<form method="post" class="login100-form validate-form" action="{% url 'enter-products' name %}">
+    {% csrf_token %}
+    <div class="container-login100-form-btn p-t-50">
+        <div class="wrap-login100-form-btn">
+            <div class="login100-form-bgbtn"></div>
+            <button class="login100-form-btn p-t-50">
+                    Add to Order Form
+            </button>
+        </div>
+    </div>
+</form> {% endcomment %}
+{% endblock  %}

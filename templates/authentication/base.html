@@ -1,0 +1,136 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Login V2</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    {% load static %}
+    <link rel="icon" type="image/png" href="{% static 'images/icons/favicon.ico' %}" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'fonts/iconic/css/material-design-iconic-font.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/animate/animate.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/animsition/css/animsition.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/select2.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/daterangepicker/daterangepicker.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <!--===============================================================================================-->
+    <link href="{% static '/assets/extra-libs/c3/c3.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static '/assets/libs/chartist/dist/chartist.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static '/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css' %}" rel="stylesheet" type="text/css" />
+    <!-- Custom CSS -->
+    <link href="{% static '/dist/css/style.min.css' %}" rel="stylesheet" type="text/css">
+    {% comment %} <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #004882;
+        }
+
+        .box {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        }
+
+        .box select {
+        background-color: #0563af;
+        color: white;
+        padding: 12px;
+        width: 250px;
+        border: none;
+        font-size: 20px;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+        -webkit-appearance: button;
+        appearance: button;
+        outline: none;
+        }
+
+        .box::before {
+        content: "\f13a";
+        font-family: FontAwesome;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 20%;
+        height: 100%;
+        text-align: center;
+        font-size: 28px;
+        line-height: 45px;
+        color: rgba(255, 255, 255, 0.5);
+        background-color: rgba(255, 255, 255, 0.1);
+        pointer-events: none;
+        }
+
+        .box:hover::before {
+        color: rgba(255, 255, 255, 0.6);
+        background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .box select option {
+        padding: 30px;
+        }
+    </style> {% endcomment %}
+</head>
+
+<body>
+    {% block content %}
+
+    {% endblock  %}
+    <div id="dropDownSelect1"></div>
+        <!--===============================================================================================-->
+        <script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+        <!--===============================================================================================-->
+        <script src="{% static 'vendor/animsition/js/animsition.min.js' %}"></script>
+        <!--===============================================================================================-->
+        <script src="{% static 'vendor/bootstrap/js/popper.js' %}"></script>
+        <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+        <!--===============================================================================================-->
+        <script src="{% static 'vendor/select2/select2.min.js' %}"></script>
+        <!--===============================================================================================-->
+        <script src="{% static 'vendor/daterangepicker/moment.min.js' %}"></script>
+        <script src="{% static 'vendor/daterangepicker/daterangepicker.js' %}"></script>
+        <!--===============================================================================================-->
+        <script src="{% static 'vendor/countdowntime/countdowntime.js' %}"></script>
+        <!--===============================================================================================-->
+        <script src="{% static 'js/main.js' %}"></script>
+
+        <script src="{% static 'js/dynamic-inputs.js' %}"></script>
+
+        <script src="{% static '/assets/libs/jquery/dist/jquery.min.js' %}"></script>
+        <script src="{% static '/assets/libs/popper.js/dist/umd/popper.min.js' %}"></script>
+        <script src="{% static '/assets/libs/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+        <!-- apps -->
+        <!-- apps -->
+        <script src="{% static '/dist/js/app-style-switcher.js' %}"></script>
+        <script src="{% static '/dist/js/feather.min.js' %}"></script>
+        <script src="{% static '/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js' %}"></script>
+        <script src="{% static '/dist/js/sidebarmenu.js' %}"></script>
+        <!--Custom JavaScript -->
+        <script src="{% static '/dist/js/custom.min.js' %}"></script>
+        <!--This page JavaScript -->
+        <script src="{% static '/assets/extra-libs/c3/d3.min.js' %}"></script>
+        <script src="{% static '/assets/extra-libs/c3/c3.min.js' %}"></script>
+        <script src="{% static '/assets/libs/chartist/dist/chartist.min.js' %}"></script>
+        <script src="{% static '/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js' %}"></script>
+        <script src="{% static '/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js' %}"></script>
+        <script src="{% static '/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js' %}"></script>
+        <script src="{% static '/dist/js/pages/dashboards/dashboard1.min.js' %}"></script>
+</body>
+
+</html>

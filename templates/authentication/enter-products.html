@@ -1,0 +1,60 @@
+
+{% extends 'authentication/dashboard-base.html' %}
+
+
+{% block name_head %}
+{{name}}
+{% endblock %}
+
+{% block content %}
+ <form id="OrderForm" class="login100-form validate-form" action="{% url 'enter-products' name %}" method="POST">
+    {% csrf_token %}
+    {% load crispy_forms_tags %}
+    <div class="">
+        <div class="box" style="background: white;">
+            <div class="limiter" style="padding: 10%;">
+                <div class="container wrapper">
+                    <form class="login100-form validate-form">
+                        <p class="container header">Product Details</p>
+                        <div class="wrap-input100" style="margin-top: 10px;">
+                            {{ order_form.product_name}}
+                            <span class="focus-input100" data-placeholder="Product Name"></span>
+                        </div>
+                        <div class="wrap-input100" style="margin-top: 5px;">
+                            {{ order_form.quantity}}
+                            <span class="focus-input100" data-placeholder="Quantity"></span>
+                        </div>
+                        <div class="wrap-input100" style="margin-top: 10px;">
+                            {{ order_form.rate }}
+                            <span class="focus-input100" data-placeholder="Carton Rate"></span>
+                        </div>
+                        <div class="wrap-input100" style="margin-top: 10px;">
+                            {{ order_form.packing }}
+                            <span class="focus-input100" data-placeholder="Packing"></span>
+                        </div>
+                        <div class="container-login100-form-btn">
+                            <div class="wrap-login100-form-btn">
+                                <div class="login100-form-bgbtn"></div>
+                                <button class="login100-form-btn" type="submit">
+                                    {% comment %} <a href="{% url 'chose-form' name %}"> {% endcomment %}
+                                    Next Product
+                                    {% comment %} </a> {% endcomment %}
+                                </button>
+                            </div>
+                            <div class="wrap-login100-form-btn" style="margin-top: 5px;">
+                                <div class="login100-form-bgbtn"></div>
+                                <button class="login100-form-btn" type="submit">
+                                    {% comment %} <a href="{% url 'order' name %}"> {% endcomment %}
+                                    Save
+                                    {% comment %} </a> {% endcomment %}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+ </form>
+
+{% endblock  %}

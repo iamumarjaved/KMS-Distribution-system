@@ -1,0 +1,61 @@
+{% extends 'authentication/dashboard-base.html' %}
+{% block name_head %}
+{{name}}
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<form class="login100-form validate-form" action="{% url 'give-order' name %}" method="POST">
+    {% csrf_token %}
+    <div class="table-responsive">
+    <table class="table table-bordered table-dark" id="table">
+        <tr>
+            <th scope="col">Product</th>
+            <th scope="col">Packing</th>
+            <th scope="col">rate</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">company</th>
+            <th scope="col">Total</th>
+        </tr>
+        {% for i in orderform %}
+        <tr>
+            <td>{{ i.product_name }}</td>
+            <td>{{ i.packing }}</td>
+            <td>
+                <input type="number" class="pr price" name="" pr_id="" value="{{i.rate}}" onchange="add_to_total(this)"
+                    style="width: 60px; height: 26px" readonly="True"/>
+            </td>
+            <td>
+                <input type="number" class="pr qty" name="qty{{forloop.counter}}" value="0" id="qty{{forloop.counter}}" onchange="add_to_total(this)"
+                    style="width: 60px; height: 26px" />
+            </td>
+            <td>
+                <input class="" name="company{{forloop.counter}}" id="company{{forloop.counter}}"
+                    style="width: 60px; height: 26px" />
+            </td>
+            <td>
+                <input type="number" name="result{{forloop.counter}}" class="pr total_price" style="width: 60px; height: 26px" id="result{{forloop.counter}}" readonly="True"/>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+    <div class="container-login100-form-btn p-t-50 card-body">
+        <div class="wrap-login100-form-btn">
+            <div class="login100-form-bgbtn"></div>
+            <button class="login100-form-btn p-t-50" type="submit">Buy</button>
+        </div>
+    </div>
+</form>
+</body>
+<script>
+    function add_to_total(el) {
+        var parent = $(el).closest("tr");
+        var price =
+            parent.find(".price").val() == "" ? 1 : parent.find(".price").val();
+        var qty = parent.find(".qty").val() == "" ? 1 : parent.find(".qty").val();
+        var total = price * qty;
+        parent.find(".total_price").val(total);
+    }
+</script>
+{% endblock %}

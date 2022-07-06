@@ -1,0 +1,58 @@
+{% extends 'authentication/dashboard-base.html' %}
+
+{% block name_head %}
+    {{name}}
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<form class="login100-form validate-form" action="{% url 'cart' name %}" method="POST">
+    {% csrf_token %}
+    <table class="table table-bordered table-dark" id="table">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Product</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">rate</th>
+            <th scope="col">Total</th>
+        </tr>
+        {% for i in orderform %}
+        <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td ><input name="pname{{forloop.counter}}" id="pname{{forloop.counter}}" value="{{i.product_name}}"></td>
+            <td class="val1" ><input name="qty{{forloop.counter}}" id="qty{{forloop.counter}}" value="{{ i.quantity }}"></td>
+            <td class="val2" ><input name="rate{{forloop.counter}}" id="rate{{forloop.counter}}" value="{{ i.rate }}"></td>
+            <td class="result"><input name="result{{forloop.counter}}" id="result{{forloop.counter}}" readOnly="True" value="{% widthratio i.quantity 1 i.rate %}"></td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td class="total">{{ f_result }}</td>
+            <td class="total"></td>
+        </tr>
+        <div class="card-body">
+            <div class="container-login100-form-btn p-t-50">
+                <div class="wrap-login100-form-btn">
+                    <div class="login100-form-bgbtn"></div>
+                    <button class="login100-form-btn p-t-50"><a href="{% url 'dashboard' name %}" style="color: white;">Finalize Bill</a></button>
+                </div>
+            </div>
+        </div>
+    </table>
+</form>
+
+<script type="text/javascript">
+    $(function() {
+
+       var TotalValue = 0;
+
+       $("tr #loop").each(function(index,value){
+         currentRow = parseFloat($(this).text());
+         TotalValue += currentRow
+       });
+
+       document.getElementById('total').innerHTML = TotalValue;
+       console.log(TotalValue);
+
+});
+</script>
+{% endblock %}

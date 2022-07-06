@@ -1,0 +1,62 @@
+{% extends 'authentication/dashboard-base.html' %}
+
+{% comment %} {% block chose %}
+
+{% url 'chose-form' 'umar' %}
+
+{% endblock  %} {% endcomment %}
+
+{% block chose %}
+
+{% url 'chose-form' name %}
+
+{% endblock  %}
+
+{% block name_head %}
+    {{name}}
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<script src="https://cdn.crunchify.com/wp-content/uploads/code/knob.js"></script>
+<script src="{% static 'dist/jquery.knob.min.js' %}"></script>
+
+<div class="col-lg-4 col-md-5">
+    <div class="card">
+        <table style="margin-left: 5px;">
+            <tr>
+                <th style="margin-left:5%;">
+                    <h3 style="font-size: 16px; font-color: black; font-weight: 900" class="card-title">Target:</h3>
+                    <h2 style="font-size: 16px; font-color: black;">{{target}}</h2>
+                    <br>
+                    <h3 style="font-size: 16px; font-color: black; font-weight: 900" class="card-title">Acheived:</h3>
+                    <h2 style="font-size: 16px; font-color: black;">{{achieved}}</h2>
+                </th>
+                <th>
+                    <div class="wrapper">
+                        <div class="row">
+                            <div class="">
+                                <div class="counter" data-cp-percentage="{{percentage}}" data-cp-color="#00bfeb">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </th>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+
+
+{% load static %}
+<script src="{% static '/dist/js/pages/dashboards/dashboard1.min.js' %}"></script>
+<script src="{% static '/dist/js/custom.min.js' %}"></script>
+<script src="{% static '/assets/extra-libs/knob/jquery.knob.min.js' %}"></script>
+<script>
+$(function () {
+    $('[data-plugin="knob"]').knob();
+});
+</script>
+{% endblock  %}

@@ -1,0 +1,89 @@
+{% extends 'authentication/dashboard-base.html' %}
+
+{% comment %} {% block chose %}
+
+{% url 'chose-form' 'umar' %}
+
+{% endblock  %} {% endcomment %}
+
+{% block chose %}
+
+{% url 'chose-form' name %}
+
+{% endblock  %}
+
+{% block name_head %}
+    {{name}}
+{% endblock %}
+
+
+{% block disabled %}hidden="True"{% endblock %}
+
+{% block add_menu %}
+<li class="sidebar-item"> <a class="sidebar-link" href="{% block target %}{% endblock %}" aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span
+    class="hide-menu">Target
+</span></a>
+</li>
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<script src="https://cdn.crunchify.com/wp-content/uploads/code/knob.js"></script>
+<script src="{% static 'dist/jquery.knob.min.js' %}"></script>
+<style>
+    .progress {
+        margin-bottom: 0;
+    }
+    .detail {
+        width:40%; color: black;display: inline-block; border-radius:10px;
+    }
+
+    @media (max-width: 800.98px) {
+        .detail {
+            width:100%;
+        }
+    }
+</style>
+<div class="table-responsive">
+    <table id="zero_config" class="table table-bordered no-wrap">
+        <thead class="thead-light">
+        <tr>
+            {% comment %} <th class="sorting_desc" tabindex="0" aria-controls="zero_config" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending" style="width: 0px;" aria-sort="descending">Product Name</th> {% endcomment %}
+            <th>Product Name</th>
+            <th>Quantities sold</th>
+            <th>total prize</th>
+            <th>Date</th>
+            <th>company</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for i in chart %}
+            <tr>
+                <td>{{i.product_name}}</td>
+                <td>{{i.quantity}}</td>
+                <td>{{i.rate}}</td>
+                <td>{{i.date}}</td>
+                <td>{{i.company}}</td>
+            </tr>
+        {% endfor %}
+        <tr>
+            <td>Total</td>
+            <td >{{sum}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+{% load static %}
+<script src="{% static '/dist/js/pages/dashboards/dashboard1.min.js' %}"></script>
+<script src="{% static '/dist/js/custom.min.js' %}"></script>
+<script src="{% static '/assets/extra-libs/knob/jquery.knob.min.js' %}"></script>
+<script>
+    $(document).ready( function () {
+        $('#myTable').DataTable();
+    } );
+$(function () {
+    $('[data-plugin="knob"]').knob();
+});
+</script>
+{% endblock  %}

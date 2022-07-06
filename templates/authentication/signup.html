@@ -1,0 +1,284 @@
+{% extends 'authentication/base.html' %}
+
+{% block content %}
+<style>
+      .box {
+          margin-top: 10%;
+        margin-left: 30%;
+        transform: translate(-50%, -50%);
+      }
+
+      .box select {
+        background-color: #0563af;
+        color: white;
+        padding: 4px;
+        border: none;
+        font-size: 16px;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+        -webkit-appearance: button;
+        appearance: button;
+        outline: none;
+      }
+
+      .box::before {
+        content: "\f13a";
+        font-family: FontAwesome;
+        position: absolute;
+
+        width: 20%;
+        height: 100%;
+        right: -40%;
+        text-align: center;
+        font-size: 28px;
+        line-height: 45px;
+        color: rgba(255, 255, 255, 0.5);
+        background-color: rgba(255, 255, 255, 0.1);
+        pointer-events: none;
+      }
+
+      .box:hover::before {
+        color: rgba(255, 255, 255, 0.6);
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+
+      .box select option {
+        padding: 10px;
+      }
+
+      @media screen and (max-width: 600px) {
+        .box select {
+            font-size: 12px;
+        }
+      }
+</style>
+{% comment %} <form class="login100-form validate-form" action="/signup/" method="post">
+
+    {% csrf_token %}
+
+    {% load crispy_form_tags %} {% endcomment %}
+{% comment %}
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+                <form class="login100-form validate-form">
+                    {% for message in messages %}
+                    <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert"></div>
+                    <strong>Message</strong> {{message}}
+                    <button class="close" type="button" data-dismiss="alert" aria-label="close">
+                        <span aria-hidden="true">&times;</span>
+                    </button> {% endfor %}
+                    <span class="login100-form-title p-b-26">
+                        Welcome
+                    </span>
+                    <span class="login100-form-title p-b-48">
+                        <i class="zmdi zmdi-font"></i>
+                    </span>
+
+                    <div class="wrap-input100 validate-input">
+                        <input id="username" class="input100" type="text" name="username" required="True">
+                        <span class="focus-input100" data-placeholder="User Name"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        <input id="fname" class="input100" type="text" name="fname" required="True">
+                        <span class="focus-input100" data-placeholder="First Name"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        <input id="lname" class="input100" type="text" name="lname" required="True">
+                        <span class="focus-input100" data-placeholder="Last Name"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        <input id="phone" class="input100" type="text" name="phone" required="True">
+                        <span class="focus-input100" data-placeholder="phone"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
+                        <input id="email" class="input100" type="text" name="email" required="True">
+                        <span class="focus-input100" data-placeholder="Email"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Enter password">
+                        <span class="btn-show-pass">
+                            <i class="zmdi zmdi-eye"></i>
+                        </span>
+                        <input id="password" class="input100" type="password" name="password" required="True">
+                        <span class="focus-input100" data-placeholder="Password"></span>
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Enter password">
+                        <span class="btn-show-pass">
+                            <i class="zmdi zmdi-eye"></i>
+                        </span>
+                        <input id="password2" class="input100" type="password" name="password2" required="True">
+                        <span class="focus-input100" data-placeholder="Re-enter Password"></span>
+                    </div>
+                    <h4>Are You a -</h4>
+                    <div style="left: 20%;" class="box">
+                        <select name="type" id="type" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                            <option value="director">Director Sales and Marketing</option>
+                            <option value="zonal">Zonal Manager</option>
+                            <option value="sales">Sales Representative</option>
+                        </select>
+                    </div>
+                    <div class="container-login100-form-btn p-t-50">
+                        <div class="wrap-login100-form-btn">
+                            <div class="login100-form-bgbtn"></div>
+                            <button class="login100-form-btn p-t-50" type="submit">
+                                Next
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="text-center p-t-50">
+                        <span class="txt1">
+                            Already have an account?
+                        </span>
+
+                        <a class="txt2" href="/signin/">
+                            Sign in
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</form> {% endcomment %}
+
+{% comment %} {% for message in messages %}
+                    <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert"></div>
+                    <strong>Message</strong> {{message}}
+                    <button class="close" type="button" data-dismiss="alert" aria-label="close">
+                        <span aria-hidden="true">&times;</span>
+                    </button> {% endfor %} {% endcomment %}
+
+<form id="RegistrationForm" class="login100-form validate-form" action="/signup/" method="post">
+    {% csrf_token %}
+    {% load crispy_forms_tags %}
+
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+                <form class="login100-form validate-form">
+                    <span class="login100-form-title p-b-26">
+                        Welcome
+                    </span>
+                    <span class="login100-form-title p-b-48">
+                        <i class="zmdi zmdi-font"></i>
+                    </span>
+
+                    <div class="wrap-input100 validate-input">
+                        {{ form.username }}
+                        <span class="focus-input100" data-placeholder="User Name"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        {{ form.first_name }}
+                        <span class="focus-input100" data-placeholder="First Name"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        {{ form.last_name }}
+                        <span class="focus-input100" data-placeholder="Last Name"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        {{ form.phone }}
+                        <span class="focus-input100" data-placeholder="phone"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Valid email is: a@b.c">
+                        {{ form.email }}
+                        <span class="focus-input100" data-placeholder="Email"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Enter password">
+                        <span class="btn-show-pass">
+                            <i class="zmdi zmdi-eye"></i>
+                        </span>
+                        {{ form.password }}
+                        <span class="focus-input100" data-placeholder="Password"></span>
+                    </div>
+                    <h4>Are You a -</h4>
+                    <div style="left: 20%;" class="box">
+                        {{form.type}}
+                        {% comment %} <select name="type" id="type" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                            <option value="director">Director Sales and Marketing</option>
+                            <option value="zonal">Zonal Manager</option>
+                            <option value="sales">Sales Representative</option>
+                        </select> {% endcomment %}
+                    </div>
+                    <div class="container-login100-form-btn p-t-50">
+                        <div class="wrap-login100-form-btn">
+                            <div class="login100-form-bgbtn"></div>
+                            <button class="login100-form-btn p-t-50" type="submit">
+                                Next
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="text-center p-t-50">
+                        <span class="txt1">
+                            Already have an account?
+                        </span>
+
+                        <a class="txt2" href="/signin/">
+                            Sign in
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</form>
+
+    {% comment %} <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+                <form class="login100-form validate-form">
+                    {% for message in messages %}
+                    <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert"></div>
+                    <strong>Message</strong> {{message}}
+                    <button class="close" type="button" data-dismiss="alert" aria-label="close">
+                        <span aria-hidden="true">&times;</span>
+                    </button> {% endfor %}
+                    <span class="login100-form-title p-b-26">
+                        Welcome
+                    </span>
+                    <span class="login100-form-title p-b-48">
+                        <i class="zmdi zmdi-font"></i>
+                    </span>
+
+
+                    {{ form.first_name|as_crispy_field}}
+                    {{ form.last_name|as_crispy_field }}
+                    {{ form.phone|as_crispy_field }}
+                    {{ form.email|as_crispy_field }}
+                    {{ form.password|as_crispy_field }}
+                    {{ form.password2|as_crispy_field }}
+                    {{ form.type|as_crispy_field }}
+                    <div class="container-login100-form-btn p-t-50">
+                        <div class="wrap-login100-form-btn">
+                            <div class="login100-form-bgbtn"></div>
+                            <button class="login100-form-btn p-t-50" type="submit">
+                                Next
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="text-center p-t-50">
+                        <span class="txt1">
+                            Already have an account?
+                        </span>
+
+                        <a class="txt2" href="/signin/">
+                            Sign in
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</form> {% endcomment %}
+
+{% endblock  %}

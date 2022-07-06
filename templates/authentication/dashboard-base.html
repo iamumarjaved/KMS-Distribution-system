@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <title>Login V2</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+              integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
+    <!--===============================================================================================-->
+    {% load static %}
+    <link rel="icon" type="image/png" href="{% static 'images/icons/favicon.ico' %}" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'fonts/iconic/css/material-design-iconic-font.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/animate/animate.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/animsition/css/animsition.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/select2.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/daterangepicker/daterangepicker.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <!--===============================================================================================-->
+    <link href="{% static '/assets/extra-libs/c3/c3.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static '/assets/libs/chartist/dist/chartist.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static '/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css' %}" rel="stylesheet"
+        type="text/css" />
+    <!-- Custom CSS -->
+    <link href="{% static '/dist/css/style.min.css' %}" rel="stylesheet" type="text/css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            var circleProgress = (function (selector) {
+                var wrapper = document.querySelectorAll(selector);
+                Array.prototype.forEach.call(wrapper, function (wrapper, i) {
+                    var wrapperWidth,
+                        wrapperHeight,
+                        percent,
+                        innerHTML,
+                        context,
+                        lineWidth,
+                        centerX,
+                        centerY,
+                        radius,
+                        newPercent,
+                        speed,
+                        from,
+                        to,
+                        duration,
+                        start,
+                        strokeStyle,
+                        text;
+
+                    var getValues = function () {
+                        wrapperWidth = parseInt(window.getComputedStyle(wrapper).width);
+                        wrapperHeight = wrapperWidth;
+                        percent = wrapper.getAttribute('data-cp-percentage');
+                        innerHTML = '<span class="percentage"><strong>' + percent +
+                            '</strong> %</span><canvas class="circleProgressCanvas" width="' +
+                            (wrapperWidth * 2) + '" height="' + wrapperHeight * 2 +
+                            '"></canvas>';
+                        wrapper.innerHTML = innerHTML;
+                        text = wrapper.querySelector(".percentage");
+                        canvas = wrapper.querySelector(".circleProgressCanvas");
+                        wrapper.style.height = canvas.style.width = canvas.style.height =
+                            wrapperWidth + "px";
+                        context = canvas.getContext('2d');
+                        centerX = canvas.width / 2;
+                        centerY = canvas.height / 2;
+                        newPercent = 0;
+                        speed = 1;
+                        from = 0;
+                        to = percent;
+                        duration = 1000;
+                        lineWidth = 25;
+                        radius = canvas.width / 2 - lineWidth;
+                        strokeStyle = wrapper.getAttribute('data-cp-color');
+                        start = new Date().getTime();
+                    };
+
+                    function animate() {
+                        requestAnimationFrame(animate);
+                        var time = new Date().getTime() - start;
+                        if (time <= duration) {
+                            var x = easeInOutQuart(time, from, to - from, duration);
+                            newPercent = x;
+                            text.innerHTML = Math.round(newPercent) + " %";
+                            drawArc();
+                        }
+                    }
+
+                    function drawArc() {
+                        var circleStart = 1.5 * Math.PI;
+                        var circleEnd = circleStart + (newPercent / 50) * Math.PI;
+                        context.clearRect(0, 0, canvas.width, canvas.height);
+                        context.beginPath();
+                        context.arc(centerX, centerY, radius, circleStart, 4 * Math.PI, false);
+                        context.lineWidth = lineWidth;
+                        context.strokeStyle = "#ddd";
+                        context.stroke();
+                        context.beginPath();
+                        context.arc(centerX, centerY, radius, circleStart, circleEnd, false);
+                        context.lineWidth = lineWidth;
+                        context.strokeStyle = strokeStyle;
+                        context.stroke();
+
+                    }
+                    var update = function () {
+                        getValues();
+                        animate();
+                    }
+                    update();
+
+                    var btnUpdate = document.querySelectorAll(".btn-update")[0];
+                    btnUpdate.addEventListener("click", function () {
+                        wrapper.setAttribute("data-cp-percentage", Math.round(getRandom(
+                            5, 95)));
+                        update();
+                    });
+                    wrapper.addEventListener("click", function () {
+                        update();
+                    });
+
+                    var resizeTimer;
+                    window.addEventListener("resize", function () {
+                        clearTimeout(resizeTimer);
+                        resizeTimer = setTimeout(function () {
+                            clearTimeout(resizeTimer);
+                            start = new Date().getTime();
+                            update();
+                        }, 250);
+                    });
+                });
+
+                //
+                // http://easings.net/#easeInOutQuart
+                //  t: current time
+                //  b: beginning value
+                //  c: change in value
+                //  d: duration
+                //
+                function easeInOutQuart(t, b, c, d) {
+                    if ((t /= d / 2) < 1) return c / 2 * t * t * t * t + b;
+                    return -c / 2 * ((t -= 2) * t * t * t - 2) + b;
+                }
+
+            });
+
+            circleProgress('.counter');
+
+            // Gibt eine Zufallszahl zwischen min (inklusive) und max (exklusive) zurück
+            function getRandom(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+        });
+    </script>
+
+</head>
+
+<body>
+    <style>
+        .box {
+            box-shadow: 5px 10px 18px #888888;
+            border-radius: 5px;
+            margin-left: 5%;
+            margin-top: 5%;
+            width: 90%;
+            height: 135%;
+            align-content: center;
+            align-items: center;
+        }
+
+        .header {
+            margin-top: -5%;
+            font-size: 55px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .font {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        @media screen and (max-width: 600px) {
+            .header {
+                margin-top: -5%;
+                font-size: 35px;
+                font-family: 'Roboto', sans-serif;
+            }
+        }
+
+        h1 {
+            box-shadow: 0px 1px 10px 2px rgba(0, 0, 0, 0.2);
+            border-bottom: 3px solid #00bfeb;
+        }
+
+        .counter {
+            display: inline-flex;
+            cursor: pointer;
+            width: 150px;
+            height: 150px;
+            position: relative;
+            justify-content: center;
+            align-items: center;
+            font-size: calc(1em + 1vmin);
+            transition: height .2s ease-in-out;
+            margin: 1em 1em;
+            border: none;
+        }
+
+        .percentage {
+            position: absolute;
+            text-align: center;
+            top: 50%;
+            left: 0;
+            right: 0;
+            vertical-align: middle;
+            transform: translate3d(0, -50%, 0);
+        }
+
+        @import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            text-decoration: none;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(-45deg, #125f70, #15a79a, #6280d8);        }
+
+        .wrapper {
+            margin: 10px;
+        }
+
+        .wrapper .top_navbar {
+            width: calc(100% - 20px);
+            height: 60px;
+            display: flex;
+            position: fixed;
+            top: 10px;
+            z-index: 100;
+        }
+
+        .wrapper .top_navbar .hamburger {
+            width: 70px;
+            height: 100%;
+            background: linear-gradient(-90deg, #3b4042fa, #2b2e30fa, #040404);
+            padding: 15px 17px;
+            border-top-left-radius: 20px;
+            cursor: pointer;
+        }
+
+        .wrapper .top_navbar .hamburger div {
+            width: 35px;
+            height: 4px;
+            background: #c6c7c9;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+
+        .wrapper .top_navbar .top_menu {
+            width: calc(100% - 70px);
+            height: 100%;
+            background: linear-gradient(45deg, #3b4042fa, #2b2e30fa, #040404);
+            border-top-right-radius: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+        }
+
+        .wrapper .top_navbar .top_menu .logo {
+            color: #d0cccc;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 3px;
+        }
+
+        .wrapper .top_navbar .top_menu ul {
+            display: flex;
+        }
+
+        .wrapper .top_navbar .top_menu ul li a {
+            display: block;
+            margin: 0 10px;
+            width: 35px;
+            height: 35px;
+            line-height: 35px;
+            text-align: center;
+            border: 1px solid #aaabac;
+            border-radius: 50%;
+            color: #aaabac;
+        }
+
+        .wrapper .top_navbar .top_menu ul li a:hover {
+            background: black;
+            color: #fff;
+        }
+
+        .wrapper .top_navbar .top_menu ul li a:hover i {
+            color: #fff;
+        }
+
+        .wrapper .sidebar {
+            position: relative;
+            top: 70px;
+            left: 10px;
+            background: #6280d8;
+            width: 0;
+            display: none;
+            height: calc(100% - 80px);
+            border-bottom-left-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .wrapper .sidebar ul li a {
+            display: block;
+            padding: 20px;
+            color: #fff;
+            position: relative;
+            margin-bottom: 1px;
+            color: #92a6e2;
+            white-space: nowrap;
+        }
+
+        .wrapper .sidebar ul li a:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: #92a6e2;
+            display: none;
+        }
+
+        .sidenav a:before {
+            background: #92a6e2;
+            display: none;
+        }
+
+        .sidenav a:hover .sidenav a.active {
+            background: #43adb5;
+            color: #fff;
+        }
+
+        .sidenav a span.icon {
+            margin-right: 10px;
+            display: inline-block;
+        }
+
+        .wrapper .sidebar ul li a span.icon {
+            margin-right: 10px;
+            display: inline-block;
+        }
+
+        .wrapper .sidebar ul li a span.title {
+            display: inline-block;
+        }
+
+        .wrapper .sidebar ul li a:hover,
+        .wrapper .sidebar ul li a.active {
+            background: #4360b5;
+            color: #fff;
+        }
+
+        .wrapper .sidebar ul li a:hover:before,
+        .wrapper .sidebar ul li a.active:before {
+            display: block;
+        }
+
+        .wrapper .main_container {
+            width: (100% - 200px);
+            margin-top: 70px;
+            margin-left: 200px;
+            padding: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .wrapper .main_container .item {
+            background: #fff;
+            margin-bottom: 10px;
+            padding: 15px;
+            font-size: 14px;
+            line-height: 22px;
+        }
+
+        .wrapper.collapse .sidebar {
+            width: 70px;
+        }
+
+        .wrapper.collapse .sidebar ul li a {
+            text-align: center;
+        }
+
+        .wrapper.collapse .sidebar ul li a span.icon {
+            margin: 0;
+        }
+
+        .wrapper.collapse .sidebar ul li a span.title {
+            display: none;
+        }
+
+        .wrapper.collapse .main_container {
+            width: (100% - 70px);
+            margin-left: 70px;
+        }
+
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 999;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            word-wrap: break-word;
+            top: 10%;
+            left: 10px;
+            background: linear-gradient(-45deg, #040404, #2b2e30fa, #3b4042fa);
+            border-bottom-left-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 15px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+            word-wrap: break-word;
+        }
+
+        .sidenav a:hover {
+            color: #f1f1f1;
+            border: 1 px solid #2e4ead;
+            background: rgba(250, 250, 250, 0.479);
+            border-radius: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            padding: 5px;
+            background-color: rgba(255, 255, 255, .15);
+            box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);
+            backdrop-filter: blur(5px);
+        }
+
+        .sidenav .closebtn {
+            border-radius: 100%;
+            position: absolute;
+            top: 0;
+            font-size: 36px;
+            margin-left: 30px;
+            padding-left: 15px;
+            width: 30%;
+        }
+
+        #main {
+            transition: margin-left .5s;
+            padding: 16px;
+        }
+
+        @media screen and (max-height: 450px) {
+            .sidenav {
+                padding-top: 15px;
+            }
+
+            .sidenav a {
+                font-size: 14px;
+            }
+        }
+    </style>
+    </head>
+
+    <body>
+
+        <div class="wrapper">
+
+            <div class="top_navbar">
+                <span style="font-size:30px;cursor:pointer" onclick="openNav(){% block disabled %}{% endblock %}">
+                    <div class="hamburger">
+                        <div class="one"></div>
+                        <div class="two"></div>
+                        <div class="three"></div>
+                    </div>
+                </span>
+                <div class="top_menu" style="position: relative;">
+                    <div class="logo">KMS</div>
+                    <ul>
+                        <li><a href="#">
+                                <i class="fas fa-search"></i></a></li>
+                        <li><a href="#">
+                                <i class="fas fa-bell"></i>
+                            </a></li>
+                        <li><a href="#">
+                                <i class="fas fa-user"></i>
+                            </a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="sidenav" id="mySidenav">
+
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+                <a class="sidebar-link sidebar-link" href="{% url 'dashboard' name %}" aria-expanded="false">
+                    <i class="fas fa-th-large"></i>
+                    <span class="hide-menu">Dashboard</span></a>
+                <!-- <li class="nav-small-cap"><span class="hide-menu"></span></li> -->
+
+                <a class="sidebar-link" href="{% block chose %}{% endblock %}" aria-expanded="false">
+                    <i class="fa-solid fa-file-waveform"></i>
+                    <span class="hide-menu">Form List</span>
+                </a>
+
+                <a class="sidebar-link" href="{% url 'order' name %}" aria-expanded="false">
+                    <i class="fa-solid fa-file-export"></i>
+                    <span class="hide-menu">Saved Form</span></a>
+
+                <a class="sidebar-link" href="{% url 'enter-products' name %}" aria-expanded="false">
+                    <i class="fa-solid fa-file-circle-plus"></i>
+                    <span class="hide-menu">Add to Form</span>
+                </a>
+
+                <a class="sidebar-link" href="{% url 'give-order' name %}" aria-expanded="false">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="hide-menu">Order</span>
+                </a> {% block add_menu %} {% endblock %}
+                <a class="sidebar-link sidebar-link" href="/signin/" aria-expanded="false">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <!-- <span class="icon" data-feather="log-out" class="feather-icon"></span> -->
+                    <span class="hide-menu">Logout</span></a>
+
+
+            </div>
+            <div class="container-fluid" id="main" style="margin-top: 100px;">
+                <div class="main-container">
+                    <div class="row">
+                        <div class="col-12">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="item" style="position: relative; z-index: 0;">
+                    {% block content %}
+
+                    {% endblock  %}
+                </div>
+
+            </div>
+        </div>
+        </div>
+        <div id="dropDownSelect1"></div>
+        <!--===============================================================================================-->
+        <script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+        <!--===============================================================================================-->
+        <script src="{% static 'vendor/animsition/js/animsition.min.js' %}"></script>
+        <!--===============================================================================================-->
+        <script src="{% static 'vendor/bootstrap/js/popper.js' %}"></script>
+        <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+        <!--===============================================================================================-->
+        <script src="{% static 'vendor/select2/select2.min.js' %}"></script>
+        <!--===============================================================================================-->
+        <script src="{% static 'vendor/daterangepicker/moment.min.js' %}"></script>
+        <script src="{% static 'vendor/daterangepicker/daterangepicker.js' %}"></script>
+        <!--===============================================================================================-->
+        <script src="{% static 'vendor/countdowntime/countdowntime.js' %}"></script>
+        <!--===============================================================================================-->
+        <script src="{% static 'js/main.js' %}"></script>
+
+        <script src="{% static 'js/dynamic-inputs.js' %}"></script>
+
+        <script src="{% static '/assets/libs/jquery/dist/jquery.min.js' %}"></script>
+        <script src="{% static '/assets/libs/popper.js/dist/umd/popper.min.js' %}"></script>
+        <script src="{% static '/assets/libs/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+        <!-- apps -->
+        <!-- apps -->
+        <script src="{% static '/dist/js/app-style-switcher.js' %}"></script>
+        <script src="{% static '/dist/js/feather.min.js' %}"></script>
+        <script src="{% static '/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js' %}"></script>
+        <script src="{% static '/dist/js/sidebarmenu.js' %}"></script>
+        <!--Custom JavaScript -->
+        <script src="{% static '/dist/js/custom.min.js' %}"></script>
+        <!--This page JavaScript -->
+        <script src="{% static '/assets/extra-libs/c3/d3.min.js' %}"></script>
+        <script src="{% static '/assets/extra-libs/c3/c3.min.js' %}"></script>
+        <script src="{% static '/assets/libs/chartist/dist/chartist.min.js' %}"></script>
+        <script src="{% static '/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js' %}"></script>
+        <script src="{% static '/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js' %}"></script>
+        <script src="{% static '/assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js' %}"></script>
+        <script src="{% static '/dist/js/pages/dashboards/dashboard1.min.js' %}"></script>
+        <script src="{% static '../dist/js/custom.min.js' %}"></script>
+        <script src="{% static '../assets/extra-libs/knob/jquery.knob.min.js' %}"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script>
+            $(function () {
+                $('[data-plugin="knob"]').knob();
+            });
+
+            function openNav() {
+                document.getElementById("mySidenav").style.display = "block";
+                document.getElementById("mySidenav").style.width = "200px";
+                document.getElementById("main").style.marginLeft = "210px";
+
+
+            }
+
+            function closeNav() {
+                document.getElementById("mySidenav").style.width = "0";
+                document.getElementById("mySidenav").style.display = "none";
+                document.getElementById("main").style.marginLeft = "0";
+
+            }
+        </script>
+        <script src="https://cdn.crunchify.com/wp-content/uploads/code/knob.js"></script>
+        {% comment %} <script src="{% static 'dist/jquery.knob.min.js' %}"></script>
+        <script src="{% static '/dist/js/custom.min.js' %}"></script> {% endcomment %}
+        <script src="https://kit.fontawesome.com/2c865cf201.js" crossorigin="anonymous"></script>
+
+    </body>
+
+</html>
